@@ -57,7 +57,9 @@ export default class OriginalView extends Component {
                     style={styles.scroll}
                 >
                     <Item
-                        title="最简单的动画处理"
+                        key={'simplestDemo'}
+                        title="单一动画处理"
+                        subTitle="Opacity、"
                         navigator={this.props.navigator}
                         navigatorName="simplestDemo"
                         component={SimplestDemo}

@@ -46,7 +46,7 @@ export default class Header extends Component {
                         navigator.pop();
                     }}
                 >
-                    <Icon name="arrow-left" size={26} color="#fff"/>
+                    <Icon name="chevron-left" size={20} color="#fff"/>
                 </TouchableHighlight>
             </View>
         );
@@ -61,4 +61,4 @@ export default class Header extends Component {
             </View>
         );
     }
-} 
+}

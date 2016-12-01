@@ -9,6 +9,7 @@ import {
     View,
     TouchableHighlight,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,6 +23,16 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         color: 'black',
+    },
+    subText: {
+        fontSize: 14,
+        color: 'black',
+        fontFamily: 'PingFangSC-Thin',
+    },
+    rightArrow: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
     }
 });
 
@@ -46,14 +57,24 @@ export default class Item extends Component {
         })
     }
 
+    _renderSubTitle() {
+        return (
+            <Text style={styles.subText}>{this.props.subTitle}</Text>
+        );
+    }
+
     render() {
+        const {subTitle} = this.props;
         return (
             <TouchableHighlight underlayColor={'transparent'} onPress={this.goTo}>
                 <View style={styles.container}>
-
                     <Text style={styles.text}>{this.props.title}</Text>
-
+                    {!!subTitle && this._renderSubTitle()}
+                    <View style={styles.rightArrow}>
+                        <Icon name="arrow-circle-right" size={26} color="#D6DCDF"/>
+                    </View>
                 </View>
+
             </TouchableHighlight>
         );
     }
