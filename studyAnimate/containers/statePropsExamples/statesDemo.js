@@ -1,5 +1,5 @@
 /**
- * Created by SamMFFL on 2016/12/1.
+ * Created by SamMFFL on 2016/12/3.
  */
 
 import React, {Component} from 'react';
@@ -8,8 +8,6 @@ import {
     Text,
     View,
     Image,
-    Animated,
-    Easing,
     TouchableHighlight,
     ScrollView,
 } from 'react-native';
@@ -44,15 +42,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class SimplestDemo extends Component {
-
-    fadeIn = null;
-
+export default class StateDemo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            fadeAnim: new Animated.Value(0),
-        };
     }
 
     _renderBox(animatedContent) {
@@ -95,17 +87,12 @@ export default class SimplestDemo extends Component {
 
     _renderOpacity() {
         return (
-            <Animated.View
-                style={[styles.animateView,{opacity: this.state.fadeAnim}]}
-            >
-                <Text style={{fontSize:20}}>Animate fadeIn</Text>
-            </Animated.View>
+            <View></View>
         );
     }
 
-
     render() {
-        const {navigator,title} = this.props;
+        const {navigator, title} = this.props;
         console.log(1)
         return (
             <View style={styles.container}>
@@ -128,16 +115,5 @@ export default class SimplestDemo extends Component {
             </View>
 
         )
-    }
-
-    componentDidMount() {
-        Animated.timing(
-            this.state.fadeAnim,
-            {
-                toValue: 1,
-                duration: 3000,
-                easing: Easing.linear
-            }
-        ).start();
     }
 }

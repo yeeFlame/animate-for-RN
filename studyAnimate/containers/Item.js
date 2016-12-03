@@ -47,12 +47,12 @@ export default class Item extends Component {
     }
 
     goTo() {
-        let {navigator, component, navigatorName} = this.props;
+        let {navigator, component, navigatorName, title} = this.props;
         navigator.push({
             name: navigatorName,
             component: component,
             params: {
-                test: 1,
+                title: title,
             }
         })
     }

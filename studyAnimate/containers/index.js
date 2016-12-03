@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AnimateExamples from './animateExamples';
+import StatePropsExample from './statePropsExamples';
 
 const styles = StyleSheet.create({
     tabContent: {
@@ -39,7 +40,7 @@ export default class Index extends Component {
                 barTintColor="white"
             >
                 <Icon.TabBarItemIOS
-                    title="代码"
+                    title="state & props"
                     iconName="code"
                     selectedIconName="file-code-o"
                     iconSize={30}
@@ -48,6 +49,31 @@ export default class Index extends Component {
                         this.setState({
                             selectedTab: 'blueTab',
                         });
+                    }}
+                >
+                    <Navigator
+                        initialRoute={{ name: 'statePropsExample', component: StatePropsExample}}
+                        configureScene={(route) =>{
+                            return Navigator.SceneConfigs.FloatFromRight
+                        }}
+                        renderScene={(route, navigator) => {
+                            let Component = route.component;
+                            return <Component {...route.params} navigator={navigator} />
+                        }}
+                    />
+                </Icon.TabBarItemIOS>
+                <Icon.TabBarItemIOS
+                    title="LayoutAnimation & animated"
+                    iconName="cube"
+                    selectedIconName="cubes"
+                    iconSize={30}
+                    //  badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
+                    selected={this.state.selectedTab === 'redTab'}
+                    onPress={() => {
+                        this.setState({
+                            selectedTab: 'redTab',
+                            notifCount: this.state.notifCount + 1,
+                        })
                     }}
                 >
                     <Navigator
@@ -60,23 +86,6 @@ export default class Index extends Component {
                             return <Component {...route.params} navigator={navigator} />
                         }}
                     />
-
-                </Icon.TabBarItemIOS>
-                <Icon.TabBarItemIOS
-                    title="game"
-                    iconName="gamepad"
-                    selectedIconName="trophy"
-                    iconSize={30}
-                    //  badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
-                    selected={this.state.selectedTab === 'redTab'}
-                    onPress={() => {
-                        this.setState({
-                            selectedTab: 'redTab',
-                            notifCount: this.state.notifCount + 1,
-                        })
-                    }}
-                >
-                    <View style={{flex:1}}><Text>2</Text></View>
                 </Icon.TabBarItemIOS>
                 <Icon.TabBarItemIOS
                     title="..."
