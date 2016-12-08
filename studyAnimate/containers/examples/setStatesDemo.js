@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class StateDemo extends Component {
+export default class SetStatesDemo extends Component {
     constructor(props) {
         super(props);
         this.startAnimation = this.startAnimation.bind(this);
@@ -111,7 +111,6 @@ export default class StateDemo extends Component {
                 });
             });
         }
-
 
     }
 

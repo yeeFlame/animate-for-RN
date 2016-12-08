@@ -8,8 +8,8 @@ import {
     Navigator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AnimateExamples from './animateExamples';
-import StatePropsExample from './statePropsExamples';
+// import AnimateExamples from './animateExamples';
+// import StatePropsExample from './statePropsExamples';
 import Example from './examples';
 
 const styles = StyleSheet.create({
@@ -63,31 +63,6 @@ export default class Index extends Component {
                         }}
                     />
                 </Icon.TabBarItemIOS>
-                {/* <Icon.TabBarItemIOS
-                    title="LayoutAnimation & animated"
-                    iconName="cube"
-                    selectedIconName="cubes"
-                    iconSize={30}
-                    //  badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
-                    selected={this.state.selectedTab === 'redTab'}
-                    onPress={() => {
-                        this.setState({
-                            selectedTab: 'redTab',
-                            notifCount: this.state.notifCount + 1,
-                        })
-                    }}
-                >
-                    <Navigator
-                        initialRoute={{ name: 'animateExample', component: AnimateExamples}}
-                        configureScene={(route) =>{
-                            return Navigator.SceneConfigs.FloatFromRight
-                        }}
-                        renderScene={(route, navigator) => {
-                            let Component = route.component;
-                            return <Component {...route.params} navigator={navigator} />
-                        }}
-                    />
-                </Icon.TabBarItemIOS> */}
                 <Icon.TabBarItemIOS
                     title="..."
                     iconName="eercast"

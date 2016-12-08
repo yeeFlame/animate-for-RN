@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         flexDirection: 'column'
     },
+    scroll: {
+        flex: 1,
+        // borderWidth: 1,
+        marginBottom: 50,
+    },
     box: {
         height: 200,
         borderTopWidth: 1,

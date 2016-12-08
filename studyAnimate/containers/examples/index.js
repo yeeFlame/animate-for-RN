@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 
 import PageView from '../PageView'
-import StatesDemo from './statesDemo';
+import SetStatesDemo from './setStatesDemo';
 import SetNativePropsDemo from './setNativePropsDemo';
 import SimplestDemo from './SimplestDemo';
 
@@ -20,11 +20,11 @@ export default class Index extends Component {
         const items = [
             {
                 key: 'statesDemo',
-                title: '使用requestAnimation处理单一动画',
+                title: '使用setState处理单一动画',
                 subTitle: 'width、height、opacity',
                 navigator: navigator,
                 navigatorName: 'statesDemo',
-                component: StatesDemo
+                component: SetStatesDemo,
             },
             {
                 key: 'setNativePropsDemo',
@@ -32,7 +32,7 @@ export default class Index extends Component {
                 subTitle: 'width、height',
                 navigator: navigator,
                 navigatorName: 'setNativePropsDemo',
-                component: SetNativePropsDemo
+                component: SetNativePropsDemo,
             },
             {
                 key: 'simplestDemo',
@@ -40,7 +40,7 @@ export default class Index extends Component {
                 subTitle: 'Opacity、',
                 navigator: navigator,
                 navigatorName: 'simplestDemo',
-                component: SimplestDemo
+                component: SimplestDemo,
             }
         ];
 
