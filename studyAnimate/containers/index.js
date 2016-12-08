@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AnimateExamples from './animateExamples';
 import StatePropsExample from './statePropsExamples';
+import Example from './examples';
 
 const styles = StyleSheet.create({
     tabContent: {
@@ -40,7 +41,7 @@ export default class Index extends Component {
                 barTintColor="white"
             >
                 <Icon.TabBarItemIOS
-                    title="state & props"
+                    title="codes"
                     iconName="code"
                     selectedIconName="file-code-o"
                     iconSize={30}
@@ -52,7 +53,7 @@ export default class Index extends Component {
                     }}
                 >
                     <Navigator
-                        initialRoute={{ name: 'statePropsExample', component: StatePropsExample}}
+                        initialRoute={{ name: 'example', component: Example}}
                         configureScene={(route) =>{
                             return Navigator.SceneConfigs.FloatFromRight
                         }}
@@ -62,7 +63,7 @@ export default class Index extends Component {
                         }}
                     />
                 </Icon.TabBarItemIOS>
-                <Icon.TabBarItemIOS
+                {/* <Icon.TabBarItemIOS
                     title="LayoutAnimation & animated"
                     iconName="cube"
                     selectedIconName="cubes"
@@ -86,7 +87,7 @@ export default class Index extends Component {
                             return <Component {...route.params} navigator={navigator} />
                         }}
                     />
-                </Icon.TabBarItemIOS>
+                </Icon.TabBarItemIOS> */}
                 <Icon.TabBarItemIOS
                     title="..."
                     iconName="eercast"

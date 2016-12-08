@@ -1,5 +1,5 @@
 /**
- * Created by SamMFFL on 2016/12/1.
+ * Created by SamMFFL on 2016/12/3.
  */
 
 import React, {Component} from 'react';
@@ -8,13 +8,13 @@ import {
     Text,
     View,
     Image,
-    Animated,
-    Easing,
     TouchableHighlight,
     ScrollView,
 } from 'react-native';
 import Header from '../Header';
+import Box from '../Box';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import demoImg from '../imgs/demo.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -44,15 +44,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class SimplestDemo extends Component {
-
-    fadeIn = null;
-
+export default class StateDemo extends Component {
     constructor(props) {
         super(props);
+        this.startAnimation = this.startAnimation.bind(this);
+        this.stopAnimation = this.stopAnimation.bind(this);
+        this._renderOpacity = this._renderOpacity.bind(this);
         this.state = {
-            fadeAnim: new Animated.Value(0),
-        };
+            width: 50,
+            height: 50,
+        }
     }
 
     _renderBox(animatedContent) {
@@ -63,16 +64,10 @@ export default class SimplestDemo extends Component {
                     <TouchableHighlight
                         underlayColor={'transparent'}
                         onPress={() => {
-                            this.fadeIn = null;
-                            this.state.fadeAnim.setValue(0)
-                            this.fadeIn = Animated.timing(
-                                this.state.fadeAnim,
-                                {
-                                    toValue: 1,
-                                    duration: 3000,
-                                    easing: Easing.linear,
-                                }
-                            ).start();
+                            // this.setState({
+                            //     opacity:0,
+                            // })
+                            this.startAnimation();
                         }}
                     >
                         <Icon name="play" size={26} color="#666"/>
@@ -81,7 +76,7 @@ export default class SimplestDemo extends Component {
                     <TouchableHighlight
                         underlayColor={'transparent'}
                         onPress={() => {
-                            this.fadeIn.stop()
+                            this.stopAnimation();
                         }}
                     >
                         <Icon name="pause" size={26} color="#666"/>
@@ -95,17 +90,42 @@ export default class SimplestDemo extends Component {
 
     _renderOpacity() {
         return (
-            <Animated.View
-                style={[styles.animateView,{opacity: this.state.fadeAnim}]}
-            >
-                <Text style={{fontSize:20}}>Animate fadeIn</Text>
-            </Animated.View>
+            <View style={[styles.animateView,{ opacity:1 }]}>
+                <Image
+                    source = { demoImg }
+                    style={{
+                        width: this.state.width,
+                        height: this.state.height
+                    }}
+                />
+            </View>
         );
+    }
+    startAnimation(){
+        var count = 0;
+        while (++count < 50) {
+            requestAnimationFrame(() =>{
+                this.setState({
+                    width: this.state.width + 1,
+                    height: this.state.height + 1
+                });
+            });
+        }
+
+
+    }
+
+    stopAnimation(){
+        this.setState({
+            width: 50,
+            height: 50
+        });
     }
 
 
+
     render() {
-        const {navigator,title} = this.props;
+        const {navigator, title} = this.props;
         console.log(1)
         return (
             <View style={styles.container}>
@@ -121,7 +141,13 @@ export default class SimplestDemo extends Component {
                     indicatorStyle="white"
                     style={styles.scroll}
                 >
-                    {this._renderBox(this._renderOpacity())}
+                    {/* {this._renderBox(this._renderOpacity())} */}
+
+                    <Box
+                        animatedContent={this._renderOpacity()}
+                        playFunc={this.startAnimation}
+                        pauseFunc={this.stopAnimation}
+                    />
                 </ScrollView>
 
 
@@ -130,14 +156,8 @@ export default class SimplestDemo extends Component {
         )
     }
 
-    componentDidMount() {
-        Animated.timing(
-            this.state.fadeAnim,
-            {
-                toValue: 1,
-                duration: 3000,
-                easing: Easing.linear
-            }
-        ).start();
+    componentDidMount(){
+        // this.startAnimation();
     }
+
 }
