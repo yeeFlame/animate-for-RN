@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/3.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/08 10:18:06
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:39:33
+*/
+
 
 import React, {Component} from 'react';
 import {
@@ -10,9 +15,9 @@ import {
     Image,
     TouchableHighlight,
     ScrollView,
-    LayoutAnimation
 } from 'react-native';
 import Header from '../Header';
+import Box from '../Box';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import demoImg from '../imgs/demo.png';
 
@@ -50,100 +55,22 @@ const styles = StyleSheet.create({
 });
 
 export default class setNativePropsDemo extends Component {
+    count = 0;
+
     constructor(props) {
         super(props);
-        this.startAnimation = this.startAnimation.bind(this);
-        this.stopAnimation = this.stopAnimation.bind(this);
-        this._renderOpacity = this._renderOpacity.bind(this);
+        this.startAnimationOfSize = this.startAnimationOfSize.bind(this);
+        this.stopAnimationOfSize = this.stopAnimationOfSize.bind(this);
+        this._renderSize = this._renderSize.bind(this);
+        this.animateSizeFunc = this.animateSizeFunc.bind(this);
+
         this.state = {
             width: 50,
             height: 50,
         }
     }
 
-    _renderBox(animatedContent) {
-        return (
-            <View style={styles.box}>
-                {animatedContent}
-                <View style={styles.boxBtn}>
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            // this.setState({
-                            //     opacity:0,
-                            // })
-                            this.startAnimation();
-                        }}
-                    >
-                        <Icon name="play" size={26} color="#666"/>
-                    </TouchableHighlight>
-
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            this.stopAnimation();
-                        }}
-                    >
-                        <Icon name="pause" size={26} color="#666"/>
-                    </TouchableHighlight>
-                </View>
-            </View>
-
-
-        )
-    }
-
-    startAnimation(){
-        // var count = 0;
-        // var width=50, height=50;
-        // while (++count < 10000) {
-        //     requestAnimationFrame(() =>{
-        //         // console.log(12)
-        //         this.refs.img.setNativeProps({
-        //             style: {
-        //                 width: width,
-        //                 height: height,
-        //             }
-        //         });
-        //     });
-        //     width += 0.01;
-        //     height += 0.01;
-        // }
-
-
-        LayoutAnimation.configureNext({
-            duration: 700, //持续时间
-            create: { // 视图创建
-                type: LayoutAnimation.Types.spring,
-                property: LayoutAnimation.Properties.scaleXY,// opacity、scaleXY
-            },
-            update: { // 视图更新
-                type: LayoutAnimation.Types.spring,
-            },
-        });
-        this.setState({
-            width: this.state.width + 100,
-            height: this.state.height + 100
-        });
-
-    }
-
-    stopAnimation(){
-        // this.refs.img.setNativeProps({
-        //     style: {
-        //         width:  50,
-        //         height: 50
-        //     }
-        // });
-
-        this.setState({
-            width: 50,
-            height: 50,
-        })
-
-    }
-
-    _renderOpacity() {
+    _renderSize() {
         return (
             <View style={[styles.animateView,{ opacity:1 }]}>
                 <Image
@@ -156,6 +83,92 @@ export default class setNativePropsDemo extends Component {
                 />
             </View>
         );
+    }
+
+    animateSizeFunc(){
+        requestAnimationFrame(() =>{
+
+            if(this.count<50){
+                ++this.count;
+
+                // this.setState({
+                //     width: this.state.width+10 ,
+                //     height: this.state.height+10
+                // });
+                this.refs.img.setNativeProps({
+                    style: {
+                        width: this.state.width++,
+                        height: this.state.height++,
+                    }
+                });
+                // console.log('count',this.count)
+                this.animateSizeFunc();
+            }
+        });
+    }
+
+    startAnimationOfSize(){
+
+        this.setState({
+            width: 50,
+            height: 50
+        });
+        this.count = 0;
+
+        this.animateSizeFunc();
+    }
+
+    stopAnimationOfSize(){
+        this.setState({
+            width: 50,
+            height: 50
+        });
+        this.refs.img.setNativeProps({
+            style: {
+                width: 50,
+                height: 50,
+            }
+        });
+        this.count = 100;
+        setTimeout(()=>{
+            this.count = 0;
+        },100)
+
+    }
+
+    startAnimation(){
+        var count = 0;
+        var width=50, height=50;
+        while (++count < 10000) {
+            requestAnimationFrame(() =>{
+                // console.log(12)
+                this.refs.img.setNativeProps({
+                    style: {
+                        width: width,
+                        height: height,
+                    }
+                });
+            });
+            width += 0.01;
+            height += 0.01;
+        }
+
+
+        // LayoutAnimation.configureNext({
+        //     duration: 700, //持续时间
+        //     create: { // 视图创建
+        //         type: LayoutAnimation.Types.spring,
+        //         property: LayoutAnimation.Properties.scaleXY,// opacity、scaleXY
+        //     },
+        //     update: { // 视图更新
+        //         type: LayoutAnimation.Types.spring,
+        //     },
+        // });
+        // this.setState({
+        //     width: this.state.width + 100,
+        //     height: this.state.height + 100
+        // });
+
     }
 
     render() {
@@ -175,7 +188,12 @@ export default class setNativePropsDemo extends Component {
                     indicatorStyle="white"
                     style={styles.scroll}
                 >
-                    {this._renderBox(this._renderOpacity())}
+                    <Box
+                        title="放大动画处理"
+                        animatedContent={this._renderSize()}
+                        playFunc={this.startAnimationOfSize}
+                        pauseFunc={this.stopAnimationOfSize}
+                    />
                 </ScrollView>
 
 

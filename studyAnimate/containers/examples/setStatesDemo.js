@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/3.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/08 10:17:49
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:39:53
+*/
+
 
 import React, {Component} from 'react';
 import {
@@ -21,6 +26,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         flexDirection: 'column'
+    },
+    scroll: {
+        flex: 1,
+        // borderWidth: 1,
+        marginBottom: 50,
     },
     box: {
         height: 200,
@@ -45,50 +55,28 @@ const styles = StyleSheet.create({
 });
 
 export default class SetStatesDemo extends Component {
+    count = 0;
+    degree = 0;
     constructor(props) {
         super(props);
-        this.startAnimation = this.startAnimation.bind(this);
-        this.stopAnimation = this.stopAnimation.bind(this);
-        this._renderOpacity = this._renderOpacity.bind(this);
+        this.startAnimationOfSize = this.startAnimationOfSize.bind(this);
+        this.stopAnimationOfSize = this.stopAnimationOfSize.bind(this);
+        this._renderSize = this._renderSize.bind(this);
+        this.animateSizeFunc = this.animateSizeFunc.bind(this);
+
+        this._renderRotate = this._renderRotate.bind(this);
+        this.animateRotateFunc = this.animateRotateFunc.bind(this);
+        this.startAnimationOfRotate = this.startAnimationOfRotate.bind(this);
+        this.stopAnimationOfRotate = this.stopAnimationOfRotate.bind(this);
+
         this.state = {
             width: 50,
             height: 50,
+            rotateValue: '0deg',
         }
     }
 
-    _renderBox(animatedContent) {
-        return (
-            <View style={styles.box}>
-                {animatedContent}
-                <View style={styles.boxBtn}>
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            // this.setState({
-                            //     opacity:0,
-                            // })
-                            this.startAnimation();
-                        }}
-                    >
-                        <Icon name="play" size={26} color="#666"/>
-                    </TouchableHighlight>
-
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            this.stopAnimation();
-                        }}
-                    >
-                        <Icon name="pause" size={26} color="#666"/>
-                    </TouchableHighlight>
-                </View>
-            </View>
-
-
-        )
-    }
-
-    _renderOpacity() {
+    _renderSize() {
         return (
             <View style={[styles.animateView,{ opacity:1 }]}>
                 <Image
@@ -101,31 +89,90 @@ export default class SetStatesDemo extends Component {
             </View>
         );
     }
-    startAnimation(){
-        var count = 0;
-        while (++count < 50) {
-            requestAnimationFrame(() =>{
+    animateSizeFunc(){
+        requestAnimationFrame(() =>{
+
+            if(this.count<25){
+                ++this.count;
+
                 this.setState({
-                    width: this.state.width + 1,
-                    height: this.state.height + 1
+                    width: this.state.width+2 ,
+                    height: this.state.height+2
                 });
-            });
-        }
-
+                // console.log('count',this.count)
+                this.animateSizeFunc();
+            }
+        });
     }
+    startAnimationOfSize(){
 
-    stopAnimation(){
         this.setState({
             width: 50,
             height: 50
         });
+        this.count = 0;
+
+        this.animateSizeFunc();
     }
+
+    stopAnimationOfSize(){
+        this.setState({
+            width: 50,
+            height: 50
+        });
+        this.count = 100;
+        setTimeout(()=>{
+            this.count = 0;
+        },100)
+
+    }
+
+    _renderRotate(){
+        return (
+            <View style={[styles.animateView,{
+                transform:[
+                    {rotate:this.state.rotateValue}
+                ]
+            }]}>
+                <Text style={{fontSize:20}}>requestAnimationFrame rotate</Text>
+            </View>
+        );
+    }
+    animateRotateFunc(){
+        requestAnimationFrame(()=>{
+            if(this.degree < 360){
+                this.degree+=30;
+                this.setState({
+                    rotateValue: `${this.degree}deg`
+                });
+                this.animateRotateFunc();
+            }
+        });
+    }
+
+    startAnimationOfRotate(){
+
+        this.setState({
+            rotateValue: '0deg',
+        });
+        this.degree = 0;
+        this.animateRotateFunc();
+
+    }
+
+    stopAnimationOfRotate(){
+        this.setState({
+            rotateValue: '0deg',
+        });
+        this.degree = 0;
+    }
+
+
 
 
 
     render() {
         const {navigator, title} = this.props;
-        console.log(1)
         return (
             <View style={styles.container}>
                 <Header
@@ -140,13 +187,19 @@ export default class SetStatesDemo extends Component {
                     indicatorStyle="white"
                     style={styles.scroll}
                 >
-                    {/* {this._renderBox(this._renderOpacity())} */}
-
                     <Box
-                        animatedContent={this._renderOpacity()}
-                        playFunc={this.startAnimation}
-                        pauseFunc={this.stopAnimation}
+                        title="放大动画处理"
+                        animatedContent={this._renderSize()}
+                        playFunc={this.startAnimationOfSize}
+                        pauseFunc={this.stopAnimationOfSize}
                     />
+                    <Box
+                        title="旋转动画处理"
+                        animatedContent={this._renderRotate()}
+                        playFunc={this.startAnimationOfRotate}
+                        pauseFunc={this.stopAnimationOfRotate}
+                    />
+
                 </ScrollView>
 
 
@@ -156,7 +209,10 @@ export default class SetStatesDemo extends Component {
     }
 
     componentDidMount(){
-        // this.startAnimation();
+        // width height
+        this.startAnimationOfSize();
+        // rotate
+        this.startAnimationOfRotate();
     }
 
 }

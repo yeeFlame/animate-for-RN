@@ -1,3 +1,12 @@
+/**
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/08 16:06:58
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:40:05
+*/
+
+
 import React, {Component} from 'react';
 import {
     StyleSheet,

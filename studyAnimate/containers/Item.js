@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/1.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/01 19:30:17
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:40:22
+*/
+
 
 import React, {Component, PropTypes} from 'react';
 import {

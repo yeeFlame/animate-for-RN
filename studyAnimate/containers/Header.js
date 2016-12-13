@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/1.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/01 16:57:35
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:40:09
+*/
+
 
 import React, {Component} from 'react';
 import {
@@ -26,7 +31,7 @@ const styles = StyleSheet.create({
     leftArrow: {
         position: 'absolute',
         left: 10,
-        top: 20,
+        top: 25,
     }
 });
 export default class Header extends Component {

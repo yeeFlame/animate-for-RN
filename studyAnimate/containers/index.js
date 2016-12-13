@@ -1,3 +1,12 @@
+/**
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/03 11:08:45
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:38:07
+*/
+
+
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -8,20 +17,8 @@ import {
     Navigator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import AnimateExamples from './animateExamples';
-// import StatePropsExample from './statePropsExamples';
-import Example from './examples';
-
-const styles = StyleSheet.create({
-    tabContent: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    tabText: {
-        color: 'white',
-        margin: 50,
-    },
-});
+import Examples from './examples';
+import Plugins from './plugins'
 
 export default class Index extends Component {
     constructor(props) {
@@ -53,7 +50,7 @@ export default class Index extends Component {
                     }}
                 >
                     <Navigator
-                        initialRoute={{ name: 'example', component: Example}}
+                        initialRoute={{ name: 'examples', component: Examples}}
                         configureScene={(route) =>{
                             return Navigator.SceneConfigs.FloatFromRight
                         }}
@@ -76,7 +73,16 @@ export default class Index extends Component {
                         });
                     }}
                 >
-                    <View style={{flex:1}}><Text>3</Text></View>
+                    <Navigator
+                        initialRoute={{ name: 'plugins', component: Plugins}}
+                        configureScene={(route) =>{
+                            return Navigator.SceneConfigs.FloatFromRight
+                        }}
+                        renderScene={(route, navigator) => {
+                            let Component = route.component;
+                            return <Component {...route.params} navigator={navigator} />
+                        }}
+                    />
                 </Icon.TabBarItemIOS>
             </TabBarIOS>
         );

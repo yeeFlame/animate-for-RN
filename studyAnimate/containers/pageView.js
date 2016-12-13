@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/3.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/03 11:48:01
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:40:29
+*/
+
 
 import React, {Component} from 'react';
 import {

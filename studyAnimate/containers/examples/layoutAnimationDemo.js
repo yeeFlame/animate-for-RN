@@ -1,6 +1,11 @@
 /**
- * Created by SamMFFL on 2016/12/3.
- */
+* @Author: shenyu <SamMFFL>
+* @Date:   2016/12/08 18:17:44
+* @Email:  samfec@163.com
+* @Last modified by:   SamMFFL
+* @Last modified time: 2016/12/13 14:39:17
+*/
+
 
 import React, {Component} from 'react';
 import {
@@ -60,6 +65,7 @@ export default class LayoutAnimationDemo extends Component {
             width: 50,
             height: 50,
         }
+        console.log(LayoutAnimation);
     }
 
     startAnimation() {
@@ -67,11 +73,11 @@ export default class LayoutAnimationDemo extends Component {
             {
                 duration: 700, //持续时间
                 create: { // 视图创建
-                    type: LayoutAnimation.Types.spring,
+                    type: LayoutAnimation.Types.keyboard,
                     property: LayoutAnimation.Properties.scaleXY,// opacity、scaleXY
                 },
                 update: { // 视图更新
-                    type: LayoutAnimation.Types.spring,
+                    type: LayoutAnimation.Types.keyboard,
                 },
             },
             function(){
