@@ -17,13 +17,20 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     box: {
-        height: 200,
+        height: 230,
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: '#D6DCDF',
         backgroundColor: '#f5fcff',
         marginBottom: 10,
         paddingBottom: 20,
+    },
+    title: {
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderColor: '#D6DCDF',
     },
     animateView: {
         flex: 1,
@@ -39,14 +46,23 @@ const styles = StyleSheet.create({
 });
 
 export default class Box extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
-    render(){
-        const {animatedContent, playFunc, pauseFunc} = this.props;
+
+    render() {
+        const {
+            animatedContent,
+            playFunc,
+            pauseFunc,
+            title
+        } = this.props;
 
         return (
             <View style={styles.box}>
+                <View style={styles.title}>
+                    <Text style={{fontSize:16}}>{title}</Text>
+                </View>
                 {animatedContent}
                 <View style={styles.boxBtn}>
                     <TouchableHighlight
@@ -64,7 +80,7 @@ export default class Box extends Component {
                             pauseFunc();
                         }}
                     >
-                        <Icon name="pause" size={26} color="#666"/>
+                        <Icon name="stop" size={26} color="#666"/>
                     </TouchableHighlight>
                 </View>
             </View>

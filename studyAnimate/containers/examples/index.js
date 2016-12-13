@@ -5,9 +5,12 @@
 import React, {Component} from 'react';
 
 import PageView from '../PageView'
+
 import SetStatesDemo from './setStatesDemo';
 import SetNativePropsDemo from './setNativePropsDemo';
-import SimplestDemo from './SimplestDemo';
+import LayoutAnimationDemo from './layoutAnimationDemo';
+import AnimatedDemo from './animatedDemo';
+
 
 export default class Index extends Component {
     constructor(props) {
@@ -35,12 +38,20 @@ export default class Index extends Component {
                 component: SetNativePropsDemo,
             },
             {
-                key: 'simplestDemo',
-                title: '单一动画处理',
-                subTitle: 'Opacity、',
+                key: 'layoutAnimationDemo',
+                title: '使用LayoutAnimation处理单一动画',
+                subTitle: 'width、height',
                 navigator: navigator,
-                navigatorName: 'simplestDemo',
-                component: SimplestDemo,
+                navigatorName: 'layoutAnimationDemo',
+                component: LayoutAnimationDemo,
+            },
+            {
+                key: 'animatedDemo',
+                title: '使用Animated处理单一动画',
+                subTitle: 'timing、decay、spring',
+                navigator: navigator,
+                navigatorName: 'animatedDemo',
+                component: AnimatedDemo,
             }
         ];
 
