@@ -24,7 +24,7 @@ export default class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTab: 'blueTab',
+            selectedTab: 'greenTab',
             notifCount: 0,
             presses: 0,
         }

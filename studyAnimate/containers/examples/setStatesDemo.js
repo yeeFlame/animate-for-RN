@@ -173,6 +173,21 @@ export default class SetStatesDemo extends Component {
 
     render() {
         const {navigator, title} = this.props;
+        const boxes = [
+            {
+                title: '放大动画处理',
+                animatedContent: this._renderSize(),
+                playFunc: this.startAnimationOfSize,
+                pauseFunc: this.stopAnimationOfSize
+            },
+            {
+                title: '旋转动画处理',
+                animatedContent: this._renderRotate(),
+                playFunc: this.startAnimationOfRotate,
+                pauseFunc: this.stopAnimationOfRotate
+            }
+        ]
+
         return (
             <View style={styles.container}>
                 <Header
@@ -187,19 +202,16 @@ export default class SetStatesDemo extends Component {
                     indicatorStyle="white"
                     style={styles.scroll}
                 >
-                    <Box
-                        title="放大动画处理"
-                        animatedContent={this._renderSize()}
-                        playFunc={this.startAnimationOfSize}
-                        pauseFunc={this.stopAnimationOfSize}
-                    />
-                    <Box
-                        title="旋转动画处理"
-                        animatedContent={this._renderRotate()}
-                        playFunc={this.startAnimationOfRotate}
-                        pauseFunc={this.stopAnimationOfRotate}
-                    />
-
+                    {
+                        boxes.map((item, index) => (
+                            <Box
+                                key={`box_setState_${index}`}
+                                title={item.title}
+                                playFunc={item.playFunc}
+                                pauseFunc={item.pauseFunc}
+                            />
+                        ))
+                    }
                 </ScrollView>
 
 

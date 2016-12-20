@@ -64,7 +64,8 @@ export default class Box extends Component {
             animatedContent,
             playFunc,
             pauseFunc,
-            title
+            title,
+            isHide,
         } = this.props;
 
         return (
@@ -73,25 +74,29 @@ export default class Box extends Component {
                     <Text style={{fontSize:16}}>{title}</Text>
                 </View>
                 {animatedContent}
-                <View style={styles.boxBtn}>
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            playFunc();
-                        }}
-                    >
-                        <Icon name="play" size={26} color="#666"/>
-                    </TouchableHighlight>
+                {
+                    !isHide && (
+                        <View style={styles.boxBtn}>
+                            <TouchableHighlight
+                                underlayColor={'transparent'}
+                                onPress={() => {
+                                    playFunc();
+                                }}
+                            >
+                                <Icon name="play" size={26} color="#666"/>
+                            </TouchableHighlight>
 
-                    <TouchableHighlight
-                        underlayColor={'transparent'}
-                        onPress={() => {
-                            pauseFunc();
-                        }}
-                    >
-                        <Icon name="stop" size={26} color="#666"/>
-                    </TouchableHighlight>
-                </View>
+                            <TouchableHighlight
+                                underlayColor={'transparent'}
+                                onPress={() => {
+                                    pauseFunc();
+                                }}
+                            >
+                                <Icon name="stop" size={26} color="#666"/>
+                            </TouchableHighlight>
+                        </View>
+                    )
+                }
             </View>
         );
     }

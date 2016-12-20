@@ -9,6 +9,8 @@
 
 import React, {Component} from 'react';
 import PageView from '../PageView'
+import scrollTabViewDemo from './scrollTabViewDemo';
+import ResolveModule from './resolveModule';
 
 export default class Index extends Component {
     constructor(props) {
@@ -18,47 +20,28 @@ export default class Index extends Component {
 
     render() {
         const {navigator} = this.props;
-        // const items = [
-        //     {
-        //         key: 'statesDemo',
-        //         title: '使用setState处理单一动画',
-        //         subTitle: 'width、height、opacity',
-        //         navigator: navigator,
-        //         navigatorName: 'statesDemo',
-        //         component: SetStatesDemo,
-        //     },
-        //     {
-        //         key: 'setNativePropsDemo',
-        //         title: '使用setNativeProps处理单一动画',
-        //         subTitle: 'width、height',
-        //         navigator: navigator,
-        //         navigatorName: 'setNativePropsDemo',
-        //         component: SetNativePropsDemo,
-        //     },
-        //     {
-        //         key: 'layoutAnimationDemo',
-        //         title: '使用LayoutAnimation处理单一动画',
-        //         subTitle: 'width、height',
-        //         navigator: navigator,
-        //         navigatorName: 'layoutAnimationDemo',
-        //         component: LayoutAnimationDemo,
-        //     },
-        //     {
-        //         key: 'animatedDemo',
-        //         title: '使用Animated处理单一动画',
-        //         subTitle: 'timing、decay、spring',
-        //         navigator: navigator,
-        //         navigatorName: 'animatedDemo',
-        //         component: AnimatedDemo,
-        //     }
-        // ];
-        //
-
-        const items = [];
+        const items = [
+            {
+                key: 'scrollTabView',
+                title: '使用插件实现tab切换',
+                subTitle: '使用React-native-scrollable-tab-view',
+                navigator: navigator,
+                navigatorName: 'scrollTabView',
+                component: scrollTabViewDemo,
+            },
+            {
+                key: 'resolveModule',
+                title: '分解动作',
+                subTitle: 'scrollView、tabBar、staticComponent',
+                navigator: navigator,
+                navigatorName: 'resolveModule',
+                component: ResolveModule,
+            },
+        ];
 
         return (
             <PageView
-                headerText="常用star数较高的动画插件"
+                headerText="常用动画插件和自制动画组件对比"
                 items={items}
             />
         )

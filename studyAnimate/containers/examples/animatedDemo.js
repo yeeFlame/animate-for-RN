@@ -1,10 +1,10 @@
 /**
-* @Author: shenyu <SamMFFL>
-* @Date:   2016/12/09 10:59:33
-* @Email:  samfec@163.com
-* @Last modified by:   SamMFFL
-* @Last modified time: 2016/12/13 14:39:39
-*/
+ * @Author: shenyu <SamMFFL>
+ * @Date:   2016/12/09 10:59:33
+ * @Email:  samfec@163.com
+ * @Last modified by:   SamMFFL
+ * @Last modified time: 2016/12/13 14:39:39
+ */
 
 
 import React, {Component} from 'react';
@@ -92,6 +92,7 @@ export default class AnimatedDemo extends Component {
             </Animated.View>
         );
     }
+
     startAnimationOfOpacity() {
         this.fadeIn = null;
         this.state.fadeAnim.setValue(0)
@@ -104,9 +105,11 @@ export default class AnimatedDemo extends Component {
             }
         ).start();
     }
+
     stopAnimationOfOpacity() {
         this.state.fadeAnim.setValue(0);
     }
+
     //--透明度线性变换--end
 
     //--放大缩小弹性变化--start
@@ -123,6 +126,7 @@ export default class AnimatedDemo extends Component {
             />
         );
     }
+
     startAnimationOfScale() {
         this.fadeIn = null;
         this.state.bounceValue.setValue(1.5);
@@ -135,9 +139,11 @@ export default class AnimatedDemo extends Component {
             }
         ).start();
     }
+
     stopAnimationOfScale() {
         this.state.bounceValue.setValue(1.5);
     }
+
     //--放大缩小弹性变化--end
 
     //--移动减速变换--start
@@ -155,6 +161,7 @@ export default class AnimatedDemo extends Component {
             />
         );
     }
+
     startAnimationOfMove() {
         this.state.movePosition.setValue(0)
         Animated.decay(
@@ -166,13 +173,15 @@ export default class AnimatedDemo extends Component {
             }
         ).start()
     }
+
     stopAnimationOfMove() {
         this.state.movePosition.setValue(0);
     }
+
     //--移动减速变换--end
 
     //--旋转线性变换--start
-    _renderRotate(){
+    _renderRotate() {
         return (
             <Animated.View
                 style={[styles.animateView,{
@@ -190,17 +199,19 @@ export default class AnimatedDemo extends Component {
             </Animated.View>
         );
     }
-    startAnimationOfRotate(){
+
+    startAnimationOfRotate() {
         this.state.rotateValue.setValue(0);
         Animated.timing(
-        this.state.rotateValue, {
-            toValue: 1,
-            duration: 1200,
-            easing: Easing.linear,
-            delay: 0,
-        }).start(() => this.startAnimationOfRotate());
+            this.state.rotateValue, {
+                toValue: 1,
+                duration: 1200,
+                easing: Easing.linear,
+                delay: 0,
+            }).start(() => this.startAnimationOfRotate());
     }
-    stopAnimationOfRotate(){
+
+    stopAnimationOfRotate() {
         this.state.rotateValue.setValue(0);
     }
 
@@ -208,6 +219,34 @@ export default class AnimatedDemo extends Component {
     render() {
         const {navigator, title} = this.props;
         console.log(1)
+
+        const boxs = [
+            {
+                title: '使用timing方法处理透明度变化',
+                animatedContent: this._renderOpacity(),
+                playFunc: this.startAnimationOfOpacity,
+                pauseFunc: this.stopAnimationOfOpacity
+            },
+            {
+                title: '使用spring方法处理放大缩小',
+                animatedContent: this._renderScale(),
+                playFunc: this.startAnimationOfScale,
+                pauseFunc: this.stopAnimationOfScale
+            },
+            {
+                title: '使用decay方法处理移动',
+                animatedContent: this._renderMove(),
+                playFunc: this.startAnimationOfMove,
+                pauseFunc: this.stopAnimationOfMove,
+            },
+            {
+                title: '使用timing处理旋转',
+                animatedContent: this._renderRotate(),
+                playFunc: this.startAnimationOfRotate,
+                pauseFunc: this.stopAnimationOfRotate,
+            }
+        ];
+
         return (
             <View style={styles.container}>
                 <Header
@@ -224,37 +263,19 @@ export default class AnimatedDemo extends Component {
                     style={styles.scroll}
                 >
 
-                    {/* {this._renderBox(this._renderOpacity())} */}
-                    <Box
-                        title="使用timing方法处理透明度变化"
-                        animatedContent={this._renderOpacity()}
-                        playFunc={this.startAnimationOfOpacity}
-                        pauseFunc={this.stopAnimationOfOpacity}
-                    />
-                    <Box
-                        title="使用spring方法处理放大缩小"
-                        animatedContent={this._renderScale()}
-                        playFunc={this.startAnimationOfScale}
-                        pauseFunc={this.stopAnimationOfScale}
-                    />
-                    <Box
-                        title="使用decay方法处理放大缩小"
-                        animatedContent={this._renderMove()}
-                        playFunc={this.startAnimationOfMove}
-                        pauseFunc={this.stopAnimationOfMove}
-                    />
-                    <Box
-                        title="使用timing处理旋转"
-                        animatedContent={this._renderRotate()}
-                        playFunc={this.startAnimationOfRotate}
-                        pauseFunc={this.stopAnimationOfRotate}
-                    />
-
+                    {
+                        boxs.map((box, index) => (
+                                <Box
+                                    key={`box_animated_${index}`}
+                                    title={box.title}
+                                    animatedContent={box.animatedContent}
+                                    playFunc={box.playFunc}
+                                    pauseFunc={box.pauseFunc}
+                                />
+                        ))
+                    }
                 </ScrollView>
-
-
             </View>
-
         )
     }
 
