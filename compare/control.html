@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../conclusion/" />
+    <link rel="next" href="performance.html" />
     
     
-    <link rel="prev" href="performance.html" />
+    <link rel="prev" href="smooth.html" />
     
 
     </head>
@@ -173,7 +173,65 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../codes/">
+            
+                <a href="../codes/">
+            
+                    
+                    常用动画插件和自制动画组件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../codes/reactNativeScrollableTabView.html">
+            
+                <a href="../codes/reactNativeScrollableTabView.html">
+            
+                    
+                    React-native-scrollable-tab-view
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../codes/myScrollTabView.html">
+            
+                <a href="../codes/myScrollTabView.html">
+            
+                    
+                    自制scrollTabView
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../codes/conclusionAndQA.html">
+            
+                <a href="../codes/conclusionAndQA.html">
+            
+                    
+                    经验总结 & 遇到的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
             
                 <a href="./">
             
@@ -187,7 +245,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="smooth.html">
+        <li class="chapter " data-level="1.4.1" data-path="smooth.html">
             
                 <a href="smooth.html">
             
@@ -200,20 +258,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="performance.html">
-            
-                <a href="performance.html">
-            
-                    
-                    性能分析
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.3.3" data-path="control.html">
+        <li class="chapter active" data-level="1.4.2" data-path="control.html">
             
                 <a href="control.html">
             
@@ -226,12 +271,25 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.3" data-path="performance.html">
+            
+                <a href="performance.html">
+            
+                    
+                    优化思路
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../conclusion/">
+        <li class="chapter " data-level="1.5" data-path="../conclusion/">
             
                 <a href="../conclusion/">
             
@@ -245,7 +303,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../conclusion/reference.html">
+        <li class="chapter " data-level="1.5.1" data-path="../conclusion/reference.html">
             
                 <a href="../conclusion/reference.html">
             
@@ -309,6 +367,30 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x53EF;&#x63A7;&#x6027;">&#x53EF;&#x63A7;&#x6027;</h1>
+<p><code>setState</code>: &#x7531;&#x4E8E;&#x662F;&#x4E0D;&#x65AD;&#x66F4;&#x6539;state&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x8FFD;&#x8E2A;&#x52A8;&#x753B;&#x67D0;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x72B6;&#x6001;&#x503C;&#x4E0D;&#x597D;&#x5904;&#x7406;</p>
+<p><code>setNativeProps</code>: &#x56E0;&#x4E3A;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x5E95;&#x5C42;&#x7279;&#x6027;&#xFF0C;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;state&#x72B6;&#x6001;&#x3002;&#x6240;&#x4EE5;&#x5BF9;&#x72B6;&#x6001;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x76D1;&#x63A7;</p>
+<p><code>layoutAnimation</code>: &#x5728;&#x5904;&#x7406;&#x7EC4;&#x5408;&#x52A8;&#x753B;&#x4E0A;&#x6709;&#x81F4;&#x547D;&#x5F31;&#x70B9;&#xFF0C;&#x9996;&#x5148;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x53EF;&#x4EE5;&#x76D1;&#x542C;&#x52A8;&#x753B;&#x7ED3;&#x675F;&#xFF0C;&#x4F46;&#x53EA;&#x5728;ios&#x4E0A;&#x6709;&#x6548;&#x3002;&#x5E76;&#x4E14;&#x5728;&#x7EC4;&#x5408;&#x52A8;&#x753B;&#x4E0A;&#x4F1A;&#x5F62;&#x6210;&#x56DE;&#x8C03;&#x5730;&#x72F1;</p>
+<pre><code class="lang-JavaScript">LayoutAnimation.configureNext(
+    {
+        duration: <span class="hljs-number">700</span>, <span class="hljs-comment">//&#x6301;&#x7EED;&#x65F6;&#x95F4;</span>
+        create: { <span class="hljs-comment">// &#x89C6;&#x56FE;&#x521B;&#x5EFA;</span>
+            type: LayoutAnimation.Types.keyboard,
+            property: LayoutAnimation.Properties.scaleXY,<span class="hljs-comment">// opacity&#x3001;scaleXY</span>
+        },
+        update: { <span class="hljs-comment">// &#x89C6;&#x56FE;&#x66F4;&#x65B0;</span>
+            type: LayoutAnimation.Types.keyboard,
+        },
+    },
+    () =&gt;{
+        LayoutAnimation.easeInEaseOut();
+        <span class="hljs-keyword">this</span>.setState({
+            width: <span class="hljs-keyword">this</span>.state.width - <span class="hljs-number">50</span>,
+            height: <span class="hljs-keyword">this</span>.state.height - <span class="hljs-number">50</span>
+        });
+    }
+);
+</code></pre>
+<p><code>Animated</code>: &#x5728;&#x53EF;&#x63A7;&#x6027;&#x4E0A;&#x6700;&#x4E3A;&#x7075;&#x6D3B;&#xFF0C;&#x4ECE;&#x4F17;&#x591A;&#x63A5;&#x53E3;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x4F46;&#x662F;&#x7075;&#x6D3B;&#x4E5F;&#x5E26;&#x6765;&#x4E86;&#x6027;&#x80FD;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x5904;&#x7406;&#x52A8;&#x753B;&#x7684;&#x65F6;&#x5019;&#x642D;&#x914D;StaticContainer&#x7EC4;&#x4EF6;&#x4F7F;&#x7528;&#xFF0C;&#x4F18;&#x5316;&#x6E32;&#x67D3;&#x6027;&#x80FD;&#x3002;</p>
 
                                 
                                 </section>
@@ -336,12 +418,12 @@
 
             
                 
-                <a href="performance.html" class="navigation navigation-prev " aria-label="Previous page: 性能分析">
+                <a href="smooth.html" class="navigation navigation-prev " aria-label="Previous page: 动画流畅度">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../conclusion/" class="navigation navigation-next " aria-label="Next page: 总结">
+                <a href="performance.html" class="navigation navigation-next " aria-label="Next page: 优化思路">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -352,7 +434,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"可控性","level":"1.3.3","depth":2,"next":{"title":"总结","level":"1.4","depth":1,"path":"conclusion/README.md","ref":"conclusion/README.md","articles":[{"title":"参考资料","level":"1.4.1","depth":2,"path":"conclusion/reference.md","ref":"conclusion/reference.md","articles":[]}]},"previous":{"title":"性能分析","level":"1.3.2","depth":2,"path":"compare/performance.md","ref":"compare/performance.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compare/control.md","mtime":"2016-11-26T15:53:33.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-12-13T09:24:09.723Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"可控性","level":"1.4.2","depth":2,"next":{"title":"优化思路","level":"1.4.3","depth":2,"path":"compare/performance.md","ref":"compare/performance.md","articles":[]},"previous":{"title":"动画流畅度","level":"1.4.1","depth":2,"path":"compare/smooth.md","ref":"compare/smooth.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compare/control.md","mtime":"2016-12-22T02:17:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-12-22T13:14:09.772Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
