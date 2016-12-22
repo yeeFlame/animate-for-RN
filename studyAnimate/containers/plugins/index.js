@@ -11,6 +11,7 @@ import React, {Component} from 'react';
 import PageView from '../PageView'
 import scrollTabViewDemo from './scrollTabViewDemo';
 import ResolveModule from './resolveModule';
+import MySTBDemo from './mySTBDemo';
 
 export default class Index extends Component {
     constructor(props) {
@@ -36,6 +37,14 @@ export default class Index extends Component {
                 navigator: navigator,
                 navigatorName: 'resolveModule',
                 component: ResolveModule,
+            },
+            {
+                key: 'mySTBDemo',
+                title: '自定义scrollTabBar',
+                subTitle: 'scrollView、tabBar、Animated',
+                navigator: navigator,
+                navigatorName: 'mySTBDemo',
+                component: MySTBDemo,
             },
         ];
 

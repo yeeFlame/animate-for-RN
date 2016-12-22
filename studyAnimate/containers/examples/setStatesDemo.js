@@ -141,7 +141,7 @@ export default class SetStatesDemo extends Component {
     animateRotateFunc(){
         requestAnimationFrame(()=>{
             if(this.degree < 360){
-                this.degree+=30;
+                this.degree+=10;
                 this.setState({
                     rotateValue: `${this.degree}deg`
                 });
@@ -207,11 +207,14 @@ export default class SetStatesDemo extends Component {
                             <Box
                                 key={`box_setState_${index}`}
                                 title={item.title}
+                                animatedContent={item.animatedContent}
                                 playFunc={item.playFunc}
                                 pauseFunc={item.pauseFunc}
                             />
                         ))
                     }
+
+
                 </ScrollView>
 
 

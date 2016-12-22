@@ -69,6 +69,7 @@ export default class LayoutAnimationDemo extends Component {
     }
 
     startAnimation() {
+        let self = this;
         LayoutAnimation.configureNext(
             {
                 duration: 700, //持续时间
@@ -80,8 +81,12 @@ export default class LayoutAnimationDemo extends Component {
                     type: LayoutAnimation.Types.keyboard,
                 },
             },
-            function(){
-                alert(1)
+            () =>{
+                LayoutAnimation.easeInEaseOut();
+                this.setState({
+                    width: this.state.width - 50,
+                    height: this.state.height - 50
+                });
             }
         );
 
@@ -133,6 +138,7 @@ export default class LayoutAnimationDemo extends Component {
                 >
                     {/* {this._renderBox(this._renderOpacity())} */}
                     <Box
+                        title="LayoutAnimation scaleXY"
                         animatedContent={this._renderOpacity()}
                         playFunc={this.startAnimation}
                         pauseFunc={this.stopAnimation}

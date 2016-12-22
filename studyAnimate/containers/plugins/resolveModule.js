@@ -15,6 +15,8 @@ import {
     StyleSheet,
     Dimensions,
     TouchableOpacity,
+    Animated,
+    Easing,
 } from 'react-native';
 
 import Header from '../Header';
@@ -60,24 +62,89 @@ const styles = StyleSheet.create({
     underline:{
         backgroundColor:'red',
     },
+    tabContainer:{
+        height: 80,
+        width: width,
+        backgroundColor: 'white',
+        // flexDirection: 'row',
+    },
+    tabView:{
+        flex: 1,
+        height: 30,
+        backgroundColor: 'gray',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tabBarUnderLine:{
+        height: 10,
+        backgroundColor:'#ee735c',
+        width: 60,
+        borderRadius: 10,
+    }
 });
 
 export default class ResolveModule extends Component {
 
     _scrollView =null;
     _currentOffsetX = 0;
+    _tabBarPosition = [];
     constructor(props) {
         super(props);
         this.state = {
-            currentPage:1
+            currentPage:1,
+            tarBarPosition: new Animated.Value(0),
         }
         this._renderScrollViewDrag = this._renderScrollViewDrag.bind(this);
         this._scrollToPage = this._scrollToPage.bind(this);
         this._dragToScroll = this._dragToScroll.bind(this);
+
+        this._renderScrollViewTab = this._renderScrollViewTab.bind(this);
+        this.setPosition = this.setPosition.bind(this);
+        this.moveToPosition = this.moveToPosition.bind(this);
+        this.setPosition();
     }
+
+    setPosition(){
+        let underlineWidth = 60;
+        let tabBarWidth = width / 3;
+        let pLeft = (tabBarWidth - underlineWidth) / 2;
+
+        for(let i=0;i<3;i++){
+            this._tabBarPosition.push(pLeft + i*tabBarWidth);
+        }
+        // this.setState({
+        //     tarBarPosition:this._tabBarPosition[0],
+        // })
+        this.state.tarBarPosition.setValue(0);
+        // this.state.tarBarPosition = this._tabBarPosition[0];
+    }
+
+    moveToPosition(position){
+        // console.log(position)
+        // this.state.tarBarPosition.setValue(0);
+        // Animated.decay(
+        //     this.state.tarBarPosition,
+        //     {
+        //         toValue: position,
+        //         velocity: 1,
+        //         deceleration: 0.997
+        //     }
+        // ).start()
+        //
+
+        Animated.timing(
+             this.state.tarBarPosition,
+            {
+                toValue: position,
+                duration: 300,
+                easing: Easing.easeIneaseOut,
+            }
+        ).start();
+    }
+
     _dragToScroll(i, pageWidth){
         if(i === this._currentOffsetX){
-            console.log('currentPage', i);
+            // console.log('currentPage', i);
             this.setState({
                 currentPage:i + 1,
             });
@@ -112,7 +179,7 @@ export default class ResolveModule extends Component {
                     pagingEnabled={true}
                     onScroll={(e) => {
                         const offsetX = e.nativeEvent.contentOffset.x;
-                        console.log(offsetX / width);
+                        // console.log(offsetX / width);
                         this._dragToScroll(offsetX / width, width);
                     }}
                 >
@@ -175,6 +242,73 @@ export default class ResolveModule extends Component {
             </View>
         );
     }
+
+    _renderScrollViewTab(){
+        // console.log(this._tabBarPosition);
+
+        return(
+            <View style={styles.animateView}>
+                <View style={styles.tabContainer}>
+                    <View style={{flexDirection:'row'}}>
+                        <View style={styles.tabView}>
+                            <TouchableOpacity
+                                underlayColor={'transparent'}
+                                onPress={()=>{
+                                    this.moveToPosition(0)
+                                    // this.setState({
+                                    //     tarBarPosition:this._tabBarPosition[0],
+                                    // })
+                                }}
+                            >
+                                <Text>123</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.tabView}>
+                            <TouchableOpacity
+                                underlayColor={'transparent'}
+                                onPress={()=>{
+                                    this.moveToPosition(1)
+                                    // this.setState({
+                                    //     tarBarPosition:this._tabBarPosition[1],
+                                    // })
+                                }}
+                            >
+                                <Text>456</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.tabView}>
+                            <TouchableOpacity
+                                underlayColor={'transparent'}
+                                onPress={()=>{
+                                    this.moveToPosition(2)
+                                    // this.setState({
+                                    //     tarBarPosition:this._tabBarPosition[2],
+                                    // })
+                                }}
+                            >
+                                <Text>789</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                    <Animated.View style={[styles.tabBarUnderLine,{
+                        transform:[
+                            {translateX: this.state.tarBarPosition.interpolate({
+                                inputRange: [0, 1, 2],
+                                outputRange: [this._tabBarPosition[0], this._tabBarPosition[1],this._tabBarPosition[2]]
+                            })}
+                            // {translateX: this.state.tarBarPosition}
+                        ]
+                    }]}/>
+                </View>
+            </View>
+        );
+    }
+
+    componentWillMount(){
+
+    }
+
     render(){
         const {navigator, title} = this.props;
         const boxes = [
@@ -182,6 +316,10 @@ export default class ResolveModule extends Component {
                 title: 'scrollView的scrollTo',
                 animatedContent: this._renderScrollViewDrag(),
             },
+            {
+                title: 'tabBar',
+                animatedContent: this._renderScrollViewTab(),
+            }
         ]
 
         return(
